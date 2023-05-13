@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Interfaces\LoginBusinessInterface;
 use App\Http\Interfaces\LoginInterface;
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegistraRequest;
 use Illuminate\Http\Response;
 
 class LoginController extends Controller
@@ -21,5 +22,10 @@ class LoginController extends Controller
         return response()->json($usuario, Response::HTTP_ACCEPTED);
     }
 
+    public function registra(RegistraRequest $request){
 
+        $token = $this->loginBusiness->registraUsuario($request->all());
+
+        return response()->json(['token' => $token], Response::HTTP_CREATED);
+    }
 }

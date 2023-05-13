@@ -5,6 +5,7 @@ namespace Tests\Unit;
 use App\Http\Business\LoginBusiness;
 use App\Http\Interfaces\LoginInterface;
 use App\Http\Interfaces\LoginServiceInterface;
+use App\Http\Interfaces\UserRepostiroyInterface;
 use App\Http\Services\LoginService;
 use App\Models\User;
 use Exception;
@@ -14,13 +15,13 @@ use Tests\TestCase;
 class LoginServiceTest extends TestCase
 {
     private $loginServiceMock;
-
+    private $userRepositoryMock;
     protected function setUp(): void
     {
         parent::setUp();
 
         $this->loginServiceMock = $this->createMock(LoginServiceInterface::class);
-
+        $this->userRepositoryMock = $this->createMock(UserRepostiroyInterface::class);
     }
 
     public function test_nao_deve_fazer_login(){
@@ -50,7 +51,8 @@ class LoginServiceTest extends TestCase
 
     public function instanciaBusiness(){
         return new LoginBusiness(
-            $this->loginServiceMock
+            $this->loginServiceMock,
+            $this->userRepositoryMock
         );
     }
 }

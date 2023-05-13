@@ -15,6 +15,6 @@ class LoginService implements LoginServiceInterface
     public function geraToken()
     {
         $user = Auth::user();
-        return $user->createToken('token-login')->accessToken;
+        return $user->createToken('token-login')->plainTextToken;
     }
 }
