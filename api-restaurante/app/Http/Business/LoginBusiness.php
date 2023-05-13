@@ -31,7 +31,7 @@ class LoginBusiness implements LoginBusinessInterface
     }
 
     public function registraUsuario(array $data){
-
+        $data['password'] = bcrypt($data['password']);
         return $this->userRepository->registra($data);
     }
 
