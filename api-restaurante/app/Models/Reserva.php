@@ -23,5 +23,6 @@ class Reserva extends Model
         self::DIA,
     ];
 
+    protected $table = 'reserva';
 
 }

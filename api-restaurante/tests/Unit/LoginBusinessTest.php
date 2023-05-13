@@ -12,7 +12,7 @@ use Exception;
 use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 
-class LoginServiceTest extends TestCase
+class LoginBusinessTest extends TestCase
 {
     private $loginServiceMock;
     private $userRepositoryMock;

@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ReservaController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,8 +22,6 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/registra', [LoginController::class, 'registra']);
 
 Route::middleware('auth:sanctum')->group(function(){
-    Route::get('/teste',function(){
-var_dump('oi');
-    });
+    Route::get('/reservas',[ReservaController::class, 'listarReservas']);
 
 });
