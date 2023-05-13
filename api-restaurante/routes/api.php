@@ -21,6 +21,8 @@ Route::post('/login', [LoginController::class, 'login']);
 
 Route::post('/registra', [LoginController::class, 'registra']);
 
+Route::post('/criar/reserva',[ReservaController::class, 'cadastroReserva']);
+
 Route::middleware('auth:sanctum')->group(function(){
     Route::get('/reservas',[ReservaController::class, 'listarReservas']);
 

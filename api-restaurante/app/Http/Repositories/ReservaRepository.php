@@ -13,4 +13,20 @@ class ReservaRepository implements ReservaRepositoryInterface
             Reserva::NAME, Reserva::DIA, Reserva::HORARIO
         ]);
     }
+
+    public function contandoReservas(){
+        $count = Reserva::all()->count();
+
+        return  $count;
+    }
+
+    public function criaReserva(array $data){
+        $reserva = Reserva::create([
+            Reserva::NAME => $data['nome'],
+            Reserva::DIA => $data['dia'],
+            Reserva::HORARIO => $data['horario'],
+        ]);
+
+        return $reserva;
+    }
 }
