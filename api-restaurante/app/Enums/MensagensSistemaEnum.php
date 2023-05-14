@@ -23,4 +23,6 @@ final class MensagensSistemaEnum extends Enum
     const RESERVA_DIA_VALIDO = "O campo dia precisa ser um valor válido";
 
     const RESERVA_HORARIO_VALIDO = "O campo horario precisa ser válido";
+
+    const RESERVA_HORARIO_EXISTENTE = "Este horário já foi reservado";
 }

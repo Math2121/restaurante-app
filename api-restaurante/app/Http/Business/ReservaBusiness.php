@@ -2,10 +2,12 @@
 
 namespace App\Http\Business;
 
-
+use App\Http\Exception\ReservaException;
 use App\Http\Interfaces\ReservaBusinessInterface;
 use App\Http\Interfaces\ReservaRepositoryInterface;
 use Carbon\Carbon;
+use Exception;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class ReservaBusiness implements ReservaBusinessInterface
 {
@@ -24,12 +26,12 @@ class ReservaBusiness implements ReservaBusinessInterface
     public function cadastrarReseva(array $data){
         $this->validaDiaSemana();
         $this->validaHorario();
+        $this->verificaHorario($data['horario']);
 
         $quantidadeReservas = $this->reservaRepository->contandoReservas();
         if($quantidadeReservas >= 15){
             throw new \Exception("Todas as mesas foram reservadas");
         }
-
 
         $reserva = $this->reservaRepository->criaReserva($data);
 
@@ -40,9 +42,8 @@ class ReservaBusiness implements ReservaBusinessInterface
     private function validaDiaSemana(){
 
         $dataAtual = Carbon::now();
-
         if($dataAtual->dayOfWeek === Carbon::SUNDAY){
-            throw new \Exception("Reservas não são feitas aos domingos");
+            throw new Exception("Reservas não são feitas aos domingos");
         }
     }
 
@@ -52,7 +53,18 @@ class ReservaBusiness implements ReservaBusinessInterface
         $final = Carbon::createFromTime(23, 59, 59); // 23:59
 
         if ($dataAtual->lessThan($inicial) || $dataAtual->greaterThan($final)) {
-            throw new \Exception("Reservas são permitidas apenas de 18:00 às 23:59");
+            throw new Exception("Reservas são permitidas apenas de 18:00 às 23:59");
         }
+    }
+
+    private function verificaHorario($horario){
+        $horarioPermitido = strtotime('18:00:00');
+        $horarioFinal = strtotime('23:59:59');
+        $horarioRecebido = strtotime($horario);
+
+        if ($horarioRecebido < $horarioPermitido || $horarioRecebido > $horarioFinal) {
+            throw new Exception("Reservas são permitidas apenas de 18:00 às 23:59");
+        }
+
     }
 }

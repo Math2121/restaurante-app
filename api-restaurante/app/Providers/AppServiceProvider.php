@@ -13,6 +13,7 @@ use App\Http\Interfaces\UserRepostiroyInterface;
 use App\Http\Repositories\ReservaRepository;
 use App\Http\Repositories\UserRepository;
 use App\Http\Services\LoginService;
+use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -22,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-
+        Carbon::setLocale('pt_BR');
         $this->app->bind(LoginServiceInterface::class, LoginService::class);
         $this->app->bind(LoginBusinessInterface::class, LoginBusiness::class);
         $this->app->bind(UserRepostiroyInterface::class, UserRepository::class);

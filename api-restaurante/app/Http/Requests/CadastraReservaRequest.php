@@ -27,7 +27,7 @@ class CadastraReservaRequest extends FormRequest
             //
             Reserva::NAME => 'required',
             Reserva::DIA => 'required|date',
-            Reserva::HORARIO => 'required|date_format:H:i'
+            Reserva::HORARIO => 'required|date_format:H:i|unique:reserva,horario'
         ];
     }
 
@@ -40,6 +40,7 @@ class CadastraReservaRequest extends FormRequest
             'dia.date' => MensagensSistemaEnum::RESERVA_DIA_VALIDO,
             'horario.required' => MensagensSistemaEnum::RESERVA_HORARIO_OBRIGATORIO,
             'horario.date_format' => MensagensSistemaEnum::RESERVA_HORARIO_VALIDO,
+            'horario.unique' => MensagensSistemaEnum::RESERVA_HORARIO_EXISTENTE,
         ];
     }
 }
