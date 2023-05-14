@@ -2,12 +2,11 @@
 
 namespace App\Http\Business;
 
-use App\Http\Exception\ReservaException;
+
 use App\Http\Interfaces\ReservaBusinessInterface;
 use App\Http\Interfaces\ReservaRepositoryInterface;
 use Carbon\Carbon;
 use Exception;
-use Illuminate\Http\Exceptions\HttpResponseException;
 
 class ReservaBusiness implements ReservaBusinessInterface
 {
@@ -27,6 +26,7 @@ class ReservaBusiness implements ReservaBusinessInterface
         $this->validaDiaSemana();
         $this->validaHorario();
         $this->verificaHorario($data['horario']);
+        $this->verificaDiaDaSemana($data['dia']);
 
         $quantidadeReservas = $this->reservaRepository->contandoReservas();
         if($quantidadeReservas >= 15){
@@ -64,6 +64,13 @@ class ReservaBusiness implements ReservaBusinessInterface
 
         if ($horarioRecebido < $horarioPermitido || $horarioRecebido > $horarioFinal) {
             throw new Exception("Reservas são permitidas apenas de 18:00 às 23:59");
+        }
+
+    }
+
+    private function verificaDiaDaSemana($dia){
+        if (strtolower($dia) === 'domingo') {
+            throw new Exception("Reservas não são permitidas aos domingos");
         }
 
     }
