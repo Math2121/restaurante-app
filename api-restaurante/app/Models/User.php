@@ -20,7 +20,6 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        self::NAME,
         self::EMAIL,
         self::PASSWORD,
     ];
