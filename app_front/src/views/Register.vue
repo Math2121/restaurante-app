@@ -20,7 +20,7 @@
         </div>
         <div class="mt-6">
           <button
-            class="w-full px-4 py-2 text-white transition-colors duration-200 transform bg-emerald-500 rounded-md hover:bg-emerald-200"
+            class="w-full px-4 py-2 text-white transition-colors duration-200 transform bg-emerald-500 rounded-md hover:bg-emerald-200 disabled:opacity-25"
             :disabled="isDisabled"
           >
             Cadastrar
@@ -58,7 +58,7 @@ export default {
       httpClient
         .post('registra',  data )
         .then((response) => {
-          console.log(response);
+      
           localStorage.setItem('token', response.data.token);
           router.push('/reservas')
         })
@@ -73,8 +73,12 @@ export default {
                 },
                 buttonsStyling: false,
             })
+        }).finally(()=>{
+          this.email = ''
+          this.senha = ''
+          this.isDisabled = false
         });
-        this.isDisabled = false
+       
     },
   },
 };

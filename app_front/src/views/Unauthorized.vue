@@ -23,13 +23,13 @@
       </h6>
 
       <p class="mb-8 text-center text-gray-500 md:text-lg">
-        Você não tem autorização para acessar essa página.
+        Você não tem autorização para acessar essa página. Faça o Login
       </p>
 
       <a
-        href="/"
+        href="/login"
         class="px-6 py-2 text-sm font-semibold text-blue-800 bg-blue-100"
-        >Fazer Reserva</a
+        >Fazer Login</a
       >
     </div>
   </div>

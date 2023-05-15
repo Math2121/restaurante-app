@@ -47,7 +47,7 @@ const router = createRouter({
 router.beforeEach((to, _, next) => {
 
   const token = getToken();
-  console.log(token)
+
   if (to.meta.resource === 'ACL') {
     if (!token) return next({ name: 'Unauthorized' })
   }
